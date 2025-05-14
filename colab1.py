@@ -12,3 +12,12 @@ from googleapiclient.errors import HttpError
 #hello
 
 #This is new
+
+
+# git pull
+# (edit)
+# save code
+# git status
+# git add colab1.py
+# git commit -m "Describe what you did here"
+# git push
