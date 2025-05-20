@@ -14,6 +14,7 @@ print("Current working directory:", os.getcwd())
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
+from flask import Flask
 
 # Step 1: Define the scope
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -40,9 +41,17 @@ loopsDataFrame = pd.DataFrame(loops.get_all_records())
 expensesDataFrame = pd.DataFrame(expenses.get_all_records())
 bagroomDataFrame = pd.DataFrame(bagroom.get_all_records())
 
-# Step 7: Print the data
-print(loopsDataFrame)
-print(expensesDataFrame)
-print(bagroomDataFrame)
 
-# Something
+
+app = Flask(__name__)
+
+@app.route("/")
+def expenses():
+    return "Expenses Sheet"
+
+@app.route("/<type>")
+def income(type):
+    return "Type of Expense: {}".format(type)
+
+if __name__ == "__main__":
+    app.run(debug=True)
