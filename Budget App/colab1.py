@@ -8,6 +8,7 @@
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import pandas as pd
 
 # Step 1: Define the scope
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -28,4 +29,4 @@ data = sheet.get_all_records()
 print(data)
 
 
-
+# Something
