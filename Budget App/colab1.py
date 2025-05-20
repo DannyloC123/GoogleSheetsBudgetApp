@@ -28,13 +28,21 @@ creds = ServiceAccountCredentials.from_json_keyfile_name(json_path, scope)
 client = gspread.authorize(creds)
 
 # Step 4: Open the Google Sheet by name
-sheet = client.open("Golf Tracker").sheet1  # Make sure it's a Google Sheet, not an .xlsx
+spreadsheet = client.open("Golf Tracker")
 
-# Step 5: Fetch the data
-data = sheet.get_all_records()
+# Step 5: Access worksheets by name
+loops = spreadsheet.worksheet("Loops")
+expenses = spreadsheet.worksheet("Expenses")
+bagroom = spreadsheet.worksheet("Bagroom")
 
-# Step 6: Print the data
-print(data)
+# Step 6: Fetch the data
+loopsDataFrame = pd.DataFrame(loops.get_all_records())
+expensesDataFrame = pd.DataFrame(expenses.get_all_records())
+bagroomDataFrame = pd.DataFrame(bagroom.get_all_records())
 
+# Step 7: Print the data
+print(loopsDataFrame)
+print(expensesDataFrame)
+print(bagroomDataFrame)
 
 # Something
