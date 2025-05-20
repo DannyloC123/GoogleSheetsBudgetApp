@@ -44,15 +44,18 @@ loopsDataFrame = pd.DataFrame(loops.get_all_records())
 expensesDataFrame = pd.DataFrame(expenses.get_all_records())
 bagroomDataFrame = pd.DataFrame(bagroom.get_all_records())
 
-
+# Gathers all of the expenses for the specific type of expense
 def expense(type):
     return expensesCategories[expensesCategories['Category'].str.contains(type, case=False)]
 
+# Sums the total amount spent on the expense type
 def expenseSum(type):
     return expense(type)['Amount'].sum().round(2)
 
+# List of all of the expenses
 expenseTypes = ['Food', 'Subscriptions', 'Golf Round', 'Golf Practice', 'Golf Equipment', 'Gigi', 'Laundry']
 
+# Gets the total expenses across all types
 def totalExpense():
     totalExpenseSum = 0
     for expense in expenseTypes:
@@ -67,17 +70,19 @@ expensesCategories = pd.DataFrame(expenses.get_all_records())
 
 
 # Website Pages
-
 app = Flask(__name__)
 
+# Home Page
 @app.route("/")
 def index():
     return render_template("index.html")
 
+# Income Page
 @app.route("/income")
 def income():
     return render_template("income.html")
 
+# Expenses Page
 @app.route("/expenses")
 def expenses():
     return render_template(
@@ -91,5 +96,6 @@ def expenses():
         gigiTotal = expenseSum('Gigi'),
         laundryTotal = expenseSum('Laundry'))
 
+# Runs the website
 if __name__ == "__main__":
     app.run(debug=True)
