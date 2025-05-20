@@ -45,43 +45,25 @@ expensesDataFrame = pd.DataFrame(expenses.get_all_records())
 bagroomDataFrame = pd.DataFrame(bagroom.get_all_records())
 
 
+def expense(type):
+    return expensesCategories[expensesCategories['Category'].str.contains(type, case=False)]
+
+def expenseSum(type):
+    return expense(type)['Amount'].sum().round(2)
+
+expenseTypes = ['Food', 'Subscriptions', 'Golf Round', 'Golf Practice', 'Golf Equipment', 'Gigi', 'Laundry']
+
+def totalExpense():
+    totalExpenseSum = 0
+    for expense in expenseTypes:
+        val = expenseSum(expense)
+        totalExpenseSum += val
+    return totalExpenseSum.round(2)
+
 
 # Gathers all of the data on the expenses sheet
 expensesCategories = pd.DataFrame(expenses.get_all_records())
 
-
-
-# filters the data so that it only gets the expenses under the Food category
-filteredExpensesFood = expensesCategories[expensesCategories['Category'].str.contains('Food', case=False)]
-
-# filters the data so that it only gets the expenses under the Subscription category
-filteredExpensesSubs = expensesCategories[expensesCategories['Category'].str.contains('Subscription', case=False)]
-
-# filters the data so that it only gets the expenses under the Golf Round category
-filteredExpensesGolfR = expensesCategories[expensesCategories['Category'].str.contains('Golf Round', case=False)]
-
-# filters the data so that it only gets the expenses under the Golf Practice category
-filteredExpensesGolfP = expensesCategories[expensesCategories['Category'].str.contains('Golf Practice', case=False)]
-
-# filters the data so that it only gets the expenses under the Golf Equipment category
-filteredExpensesGolfE = expensesCategories[expensesCategories['Category'].str.contains('Golf Equipment', case=False)]
-
-# filters the data so that it only gets the expenses under the Gigi category
-filteredExpensesGigi = expensesCategories[expensesCategories['Category'].str.contains('Gigi', case=False)]
-
-# filters the data so that it only gets the expenses under the Laundry category
-filteredExpensesLaundry = expensesCategories[expensesCategories['Category'].str.contains('Laundry', case=False)]
-
-
-# Adds the total amount of money spent in each category
-foodSum = filteredExpensesFood['Amount'].sum()
-subsSum = filteredExpensesSubs['Amount'].sum().round(2)
-golfRSum = filteredExpensesGolfR['Amount'].sum()
-golfPSum = filteredExpensesGolfP['Amount'].sum()
-golfESum = filteredExpensesGolfE['Amount'].sum()
-gigiSum = filteredExpensesGigi['Amount'].sum()
-laundrySum = filteredExpensesLaundry['Amount'].sum()
-totalExpenses = (foodSum + subsSum + golfRSum + golfPSum + golfESum + gigiSum + laundrySum).round(2)
 
 
 # Website Pages
@@ -100,14 +82,14 @@ def income():
 def expenses():
     return render_template(
         "expenses.html",
-        total_expenses = totalExpenses,
-        foodTotal = foodSum,
-        subTotal = subsSum,
-        golfRTotal = golfRSum,
-        golfPTotal = golfPSum,
-        golfETotal = golfESum,
-        gigiTotal = gigiSum,
-        laundryTotal = laundrySum)
+        total_expenses = totalExpense(),
+        foodTotal = expenseSum('Food'),
+        subTotal = expenseSum('Subscription'),
+        golfRTotal = expenseSum('Golf Round'),
+        golfPTotal = expenseSum('Golf Practice'),
+        golfETotal = expenseSum('Golf Equipment'),
+        gigiTotal = expenseSum('Gigi'),
+        laundryTotal = expenseSum('Laundry'))
 
 if __name__ == "__main__":
     app.run(debug=True)
