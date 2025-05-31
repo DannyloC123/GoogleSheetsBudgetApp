@@ -33,15 +33,21 @@
         }
 
         .fixed-income-button {
-            position: fixed;
-            top: 160px;
-            left: 90px;
+            position: absolute;
+            top: 25%;
+            left: 25%;
         }
 
         .fixed-expenses-button {
+            position: absolute;
+            top: 25%;
+            right: 25%;
+        }
+
+        .fixed-pie-chart {
             position: fixed;
-            top: 160px;
-            right: 90px;
+            top: 30%;
+            right: 13%;
         }
 
         .center {
@@ -66,11 +72,15 @@
         <h1>Welcome to the Budget App</h1>
 
         <div class="fixed-income-button">
-        <a href="/income"><button>Go to Income</button></a>
+            <a href="/income"><button>Go to Income</button></a>
         </div>
 
         <div class="fixed-expenses-button">
-        <a href="/expenses"><button>Go to Expenses</button></a>
+            <a href="/expenses"><button>Go to Expenses</button></a>
+        </div>
+
+        <div class="fixed-pie-chart">
+            <img src="{{url_for('static', filename='images/pie_chart.png')}}" alt="Pie Chart">
         </div>
     </div>
 </body>

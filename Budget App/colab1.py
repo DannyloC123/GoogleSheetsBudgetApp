@@ -15,6 +15,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 from flask import Flask, render_template
+import matplotlib.pyplot as plt
 
 
 # API Access
@@ -66,6 +67,27 @@ def totalExpense():
 
 # Gathers all of the data on the expenses sheet
 expensesCategories = pd.DataFrame(expenses.get_all_records())
+
+
+# Using matplotlib, create pie chart
+# Categories
+labels = 'Food', 'Subsrciptions', 'Golf Rounds', 'Golf Practice', 'Golf Equipment', 'Gigi', 'Laundry'
+# Amount spent
+sizes = [expenseSum('Food'), expenseSum('Subscriptions'), expenseSum('Golf Rounds'), expenseSum('Golf Practice'), expenseSum('Golf Equipment'), expenseSum('Gigi'), expenseSum('Laundry')]
+
+# Using a dictionary, every category is given a total amount spent
+dictionary = {'sizes':sizes, 'labels':labels}
+pieChart = pd.DataFrame(dictionary)
+
+# Displays the pie chart
+plt.pie(x=pieChart.sizes)
+# Dispays the pie chart legend
+plt.legend(labels=pieChart.labels, loc=[0.95,0.35])
+
+# Saves the image as png, in a specific folder to be accessed later by html file
+image_path = os.path.join('static', 'images', 'pie_chart.png')
+plt.savefig(image_path, transparent=True)
+plt.close
 
 
 
