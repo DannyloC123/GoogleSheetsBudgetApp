@@ -42,7 +42,7 @@ bagroom = spreadsheet.worksheet("Bagroom")
 
 # Step 6: Fetch the data
 loopsDataFrame = pd.DataFrame(loops.get_all_records())
-expensesDataFrame = pd.DataFrame(expenses.get_all_records())
+expensesCategories = pd.DataFrame(expenses.get_all_records())
 bagroomDataFrame = pd.DataFrame(bagroom.get_all_records())
 
 # Gathers all of the expenses for the specific type of expense
@@ -65,8 +65,101 @@ def totalExpense():
     return totalExpenseSum.round(2)
 
 
-# Gathers all of the data on the expenses sheet
-expensesCategories = pd.DataFrame(expenses.get_all_records())
+# Gets all the income in the month chosen
+def monthIncome(month):
+    monthNum = ''
+
+    # I will find a more effective way of doing this later
+    if month.lower() == 'january':
+        monthNum = '-01-'
+    elif month.lower() == 'february':
+        monthNum = '-02-'
+    elif month.lower() == 'march':
+        monthNum = '-03-'
+    elif month.lower() == 'april':
+        monthNum = '-04-'
+    elif month.lower() == 'may':
+        monthNum = '-05-'
+    elif month.lower() == 'june':
+        monthNum = '-06-'
+    elif month.lower() == 'july':
+        monthNum = '-07-'
+    elif month.lower() == 'august':
+        monthNum = '-08-'
+    elif month.lower() == 'september':
+        monthNum = '-09-'
+    elif month.lower() == 'october':
+        monthNum = '-10-'
+    elif month.lower() == 'november':
+        monthNum = '-11-'
+    elif month.lower() == 'december':
+        monthNum = '-12-'
+    return loopsDataFrame[loopsDataFrame['Date'].str.contains(monthNum, case=False)]
+
+# Gets all the income from the person chosen
+def personIncome(person):
+    return loopsDataFrame[loopsDataFrame['Client Name/Golfer'].str.contains(person, case=False)]
+
+# Gets the total sum of income in a month
+def totalMonthIncome(monthNum):
+    return monthIncome(monthNum)['Money Earned'].sum().round(2)
+
+# Gets the total sum of income from a person
+def totalPersonIncome(person):
+    return personIncome(person)['Money Earned'].sum().round(2)
+
+# Gets the total life time amount of income earned
+def income():
+    return loopsDataFrame['Money Earned'].sum().round(2)
+
+
+
+
+
+
+# Using matpltlib to create a bar graph
+# Gathers the total amount of income per month
+
+# Months
+months = 'may', 'june', 'july', 'august', 'september'
+
+# Amount earned
+amount = [
+    totalMonthIncome('may'),
+    totalMonthIncome('june'),
+    totalMonthIncome('july'),
+    totalMonthIncome('august'),
+    totalMonthIncome('september'),
+]
+
+
+fig, ax = plt.subplots()
+
+# Uses matpltlib to create bar graph
+plt.bar(months, amount, color='green')
+
+
+# White axis borders
+for spine in ax.spines.values():
+    spine.set_color('white')
+
+# White ticks
+ax.tick_params(axis='x', colors='white')
+ax.tick_params(axis='y', colors='white')
+
+# White labels
+ax.xaxis.label.set_color('white')
+ax.yaxis.label.set_color('white')
+
+# White title
+ax.set_title("Monthly Income", color='white')
+
+
+# Saves the bar graph in files
+bar_image_path = os.path.join('static', 'images', 'bar_chart.png')
+plt.savefig(bar_image_path, transparent=True)
+plt.close()
+
 
 
 # Using matplotlib, create pie chart
@@ -84,11 +177,13 @@ plt.pie(x=pieChart.sizes)
 # Dispays the pie chart legend
 plt.legend(labels=pieChart.labels, loc=[0.95,0.35])
 
+# Title
+plt.title('Monthly Expenses', color='white')
+
 # Saves the image as png, in a specific folder to be accessed later by html file
 image_path = os.path.join('static', 'images', 'pie_chart.png')
 plt.savefig(image_path, transparent=True)
 plt.close
-
 
 
 # Website Pages
@@ -102,7 +197,21 @@ def index():
 # Income Page
 @app.route("/income")
 def income():
-    return render_template("income.html")
+    return render_template("income.html",
+        #totalIncome = income(),
+        january = totalMonthIncome('january'),
+        february = totalMonthIncome('february'),
+        march = totalMonthIncome('march'),
+        april = totalMonthIncome('april'),
+        may = totalMonthIncome('may'),
+        june = totalMonthIncome('june'),
+        july = totalMonthIncome('july'),
+        august = totalMonthIncome('august'),
+        september = totalMonthIncome('september'),
+        october = totalMonthIncome('october'),
+        november = totalMonthIncome('november'),
+        december = totalMonthIncome('december'),
+        )
 
 # Expenses Page
 @app.route("/expenses")

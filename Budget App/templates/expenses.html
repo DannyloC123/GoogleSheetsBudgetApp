@@ -14,10 +14,29 @@
                 p {
                     color: white;
                 }
+
+                /* Sticky header bar that stays at the top when scrolling */
+                .sticky-buttons {
+                    position: sticky;          /* Sticks to the top on scroll */
+                    top: 0;                    /* Aligns to the very top */
+                    background-color: rgb(0, 121, 14); /* Teal background */
+                    /* border: 1px solid white;          /* Border color */
+                    padding: 10px;             /* Padding inside the sticky bar */
+                    color: white;              /* White text */
+                    font-weight: bold;         /* Bold font */
+                    font-family: Verdana;
+                    text-align: center;        /* Centered text */
+                    z-index: 1000;             /* Keeps it above other elements */
+                    box-shadow: 0 2px 5px white;
+                }
             </style>
         </head> 
 
         <body>
+            <!-- Sticky top bar -->
+            <div class="sticky-buttons">Luis Cruz Budget</div>
+
+
             <h1>Expenses Page</h1>
             <p>This is where you'll track your expenses.</p>
             <h1>Total Expenses: ${{ total_expenses }}</h1>

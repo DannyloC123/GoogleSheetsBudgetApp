@@ -3,82 +3,115 @@
 <head>
     <title>Finance Tracker</title>
     <style>
+        /* General button styling */
         button {
-            background: rgb(2, 2, 144);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 16px;
-            margin: 10px;
-            border-radius: 8px;
-            cursor: pointer;
+            background: rgb(2, 2, 144); /* Dark blue background */
+            color: white;              /* White text */
+            border: none;              /* No border */
+            padding: 15px 32px;        /* Padding inside the button */
+            font-size: 16px;           /* Text size */
+            margin: 10px;              /* Space around button */
+            border-radius: 8px;        /* Rounded corners */
+            cursor: pointer;           /* Pointer cursor on hover */
         }
 
+        /* Sticky header bar that stays at the top when scrolling */
         .sticky-buttons {
-            position: sticky;
-            top: 0;
-            background-color: rgb(0, 145, 140);
-            border: 2px solid #00cccc;
-            padding: 10px;
-            color: white;
-            font-weight: bold;
-            text-align: center;
-            z-index: 1000;
+            position: sticky;          /* Sticks to the top on scroll */
+            top: 8px;                    /* Aligns to the very top */
+            background-color: rgb(0, 121, 14); /* Teal background */
+            /* border: 1px solid white;          /* Border color */
+            padding: 10px;             /* Padding inside the sticky bar */
+            color: white;              /* White text */
+            font-weight: bold;         /* Bold font */
+            font-family: Verdana;
+            text-align: center;        /* Centered text */
+            z-index: 1000;             /* Keeps it above other elements */
+
+            max-width: 99%;
+            margin: 0 auto;
+            box-sizing: border-box; /* Ensures width includes padding */
+
+            box-shadow: 0 2px 5px white;
+
         }
 
+        /* Page body styling */
         body {
-            background-color: rgba(0, 0, 21, 0.903);
-            margin: 0;
-            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 21, 0.903); /* Dark blue/black background */
+            margin: 0;                               /* Remove default margins */
+            font-family: Arial, sans-serif;          /* Set font */
+            height: 100%;
+            overflow-y: auto;
         }
 
+        /* Positions the Income button at 25% from top and 25% from left */
         .fixed-income-button {
             position: absolute;
-            top: 25%;
+            top: 23%;
             left: 25%;
         }
 
+        /* Positions the Expenses button at 25% from top and 25% from right */
         .fixed-expenses-button {
             position: absolute;
-            top: 25%;
-            right: 25%;
+            top: 23%;
+            right: 24%;
         }
 
+        /* Positions the pie chart at 30% from top and 13% from right, fixed to screen */
         .fixed-pie-chart {
-            position: fixed;
+            position: absolute;
             top: 30%;
-            right: 13%;
+            right: 10%;
         }
 
+        .fixed-bar-chart {
+            position: absolute;
+            top: 30%;
+            left: 10%;
+        }
+
+        /* Centers content vertically with margin from the top */
         .center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-top: 40px;
+            display: flex;               /* Flex layout */
+            flex-direction: column;     /* Stack items vertically */
+            align-items: center;        /* Center horizontally */
+            text-align: center;         /* Center text */
+            margin-top: 30px;           /* Space below sticky header */
         }
 
+        /* Styling for the main heading */
         h1 {
-            color: white;
-            margin-bottom: 20px;
+            color: white;               /* White text */
+            margin-bottom: 20px;        /* Space below heading */
         }
     </style>
 </head>
 
 <body>
-    <div class="sticky-buttons">Sticky Button</div>
+    <!-- Sticky top bar -->
+    <div class="sticky-buttons">Luis Cruz Budget</div>
 
+    <!-- Main content container -->
     <div class="center">
         <h1>Welcome to the Budget App</h1>
 
+        <!-- Income button positioned absolutely -->
         <div class="fixed-income-button">
             <a href="/income"><button>Go to Income</button></a>
         </div>
 
+        <div class="fixed-bar-chart">
+            <img src="{{url_for('static', filename='images/bar_chart.png')}}" alt="Bar Chart">
+        </div>
+
+        <!-- Expenses button positioned absolutely -->
         <div class="fixed-expenses-button">
             <a href="/expenses"><button>Go to Expenses</button></a>
         </div>
 
+        <!-- Pie chart image fixed to the screen -->
         <div class="fixed-pie-chart">
             <img src="{{url_for('static', filename='images/pie_chart.png')}}" alt="Pie Chart">
         </div>
