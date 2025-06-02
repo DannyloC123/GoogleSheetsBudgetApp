@@ -1,55 +1,146 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Income</title>
         <style>
-            body{
-                background-color: rgba(0, 0, 21, 0.903);
-            }
+        body{
+            background-color: rgba(0, 0, 21, 0.903);
+        }
 
-            h1 {
-                color: white;
-            }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px; /* Example width */
+            height: 100%; /* Occupy the full height */
+            background-color: #1a0033e2; /* Example background color */
+        }
 
-            p {
-                color: white;
-            }
+        button {
+            width: 240px;
+            box-sizing: border-box;
+            background: rgba(18, 18, 72, 0); /* Dark blue background */
+            color: white;              /* White text */
+            border: rgb(2, 2, 2);
+            padding: 15px;         /* Padding inside the button */
+            font-size: 16px;           /* Text size */
+            cursor: pointer;           /* Pointer cursor on hover */
+            text-align: left;
+            border-radius: 8px;
+            margin: 5px;
+        }
 
-            /* Sticky header bar that stays at the top when scrolling */
-            .sticky-buttons {
-                position: sticky;          /* Sticks to the top on scroll */
-                top: 0;                    /* Aligns to the very top */
-                background-color: rgb(0, 121, 14); /* Teal background */
-                /* border: 1px solid white;          /* Border color */
-                padding: 10px;             /* Padding inside the sticky bar */
-                color: white;              /* White text */
-                font-weight: bold;         /* Bold font */
-                font-family: Verdana;
-                text-align: center;        /* Centered text */
-                z-index: 1000;             /* Keeps it above other elements */
-                box-shadow: 0 2px 5px white;
-            }
+        button:hover {
+            background-color: white;
+            color: black;
+            border-radius: 8px;
+        }
+
+        .fixed-profile-picture {
+            position: absolute;
+            top: 5%;
+            left: 15%;
+            border-radius: 50%;
+        }
+
+        .fixed-profile-picture img {
+            border-radius: 50%;
+            object-fit: cover;
+            width: 150px;
+            height: 200px;
+        }
+
+        .fixed-profile {
+            position: absolute;
+            top: 35%;
+            left: 30%;
+        }
+
+        p {
+            color:white;
+            font-size: 16px;
+            font-family: sans-serif;
+        }
+
+        .fixed-home-button {
+            position: absolute;
+            top: 45%;
+            left: 0%;
+        }
+
+        .fixed-income-button {
+            position: absolute;
+            top: 54%;
+            left: 0%;
+        }
+
+        .fixed-expenses-button {
+            position: absolute;
+            top: 63%;
+            left: 0%;
+        }
+
+        .fixed-goals-button {
+            position: absolute;
+            top: 72%;
+            left: 0%;
+        }
+
+        .fixed-settings-button {
+            position: absolute;
+            top: 81%;
+            left: 0%;
+        }
+
+        .fixed-text {
+            color: white;
+            position: absolute;
+            left: 20%;
+        }
         </style>
+
     </head>
-    <body>
-        <!-- Sticky top bar -->
-        <div class="sticky-buttons">Luis Cruz Budget</div>
+        <body>
+            <div class="sidebar">
+                <!-- Profile Picture -->
+                <div class="fixed-profile-picture">
+                    <img src="{{url_for('static', filename='images/luis_pic.png')}}" alt="Luis Profile" width="150" height="150">
+                </div>
+
+                <div class="fixed-profile">
+                    <p>Luis Cruz</p>
+                </div>
+
+                <!-- Home Button -->
+                <div class="fixed-home-button">
+                    <a href="/"><button>Home</button></a>
+                </div>
+
+                <!-- Income Button -->
+                <div class="fixed-income-button">
+                    <a href="/income"><button>Income</button></a>
+                </div>
+
+                <!-- Expenses Button -->
+                <div class="fixed-expenses-button">
+                    <a href="/expenses"><button>Expenses</button></a>
+                </div>
+
+                <!--Goals Button -->
+                <div class="fixed-goals-button">
+                    <a href="/goals"><button>Goals</button></a>
+                </div>
+
+                <!-- Settings Button -->
+                <div class="fixed-settings-button">
+                    <a href="/settings"><button>Settings</button></a>
+                </div>
+            </div>
 
 
-        <h1>This is the Income Page</h1>
-        <p>Months: </p>
-        <p>January: ${{ january }}</p>
-        <p>February: ${{ february }}</p>
-        <p>March: ${{ march }}</p>
-        <p>April: ${{ april }}</p>
-        <p>May: ${{ may }}</p>
-        <p>June: ${{ june }}</p>
-        <p>July: ${{ july }}</p>
-        <p>August: ${{ august }}</p>
-        <p>September: ${{ september }}</p>
-        <p>October: ${{ october }}</p>
-        <p>November: ${{ november }}</p>
-        <p>December: ${{ december }}</p>
-        <a href="/"><button>Back to Home</button></a>
-    </body>
+            <div class="fixed-text">
+                <h1>This is the Income Page</h1>
+                <p>May: ${{ may }}</p>
+                <p>Hours Worked in May: {{mayHours}}</p>
+            </div>
+        </body>
 </html>

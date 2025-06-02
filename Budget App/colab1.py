@@ -109,12 +109,104 @@ def totalPersonIncome(person):
     return personIncome(person)['Money Earned'].sum().round(2)
 
 # Gets the total life time amount of income earned
-def income():
+def incomeLoops():
     return loopsDataFrame['Money Earned'].sum().round(2)
 
+def bagRoomHours(month):
+    monthNum = 0
+    # I will find a more effective way of doing this later
+    if month.lower() == 'january':
+        monthNum = '-01-'
+    elif month.lower() == 'february':
+        monthNum = '-02-'
+    elif month.lower() == 'march':
+        monthNum = '-03-'
+    elif month.lower() == 'april':
+        monthNum = '-04-'
+    elif month.lower() == 'may':
+        monthNum = '-05-'
+    elif month.lower() == 'june':
+        monthNum = '-06-'
+    elif month.lower() == 'july':
+        monthNum = '-07-'
+    elif month.lower() == 'august':
+        monthNum = '-08-'
+    elif month.lower() == 'september':
+        monthNum = '-09-'
+    elif month.lower() == 'october':
+        monthNum = '-10-'
+    elif month.lower() == 'november':
+        monthNum = '-11-'
+    elif month.lower() == 'december':
+        monthNum = '-12-'
+    return bagroomDataFrame[bagroomDataFrame['Hours Worked'].str.contains(month, case=False)]
 
+def totalbagRoomHours(monthNum):
+    return bagRoomHours(monthNum)['Hours Worked'].sum().round(2)
 
+def bagRoomTips(month):
+    MonthNum = 0
+    # I will find a more effective way of doing this later
+    if month.lower() == 'january':
+        monthNum = '-01-'
+    elif month.lower() == 'february':
+        monthNum = '-02-'
+    elif month.lower() == 'march':
+        monthNum = '-03-'
+    elif month.lower() == 'april':
+        monthNum = '-04-'
+    elif month.lower() == 'may':
+        monthNum = '-05-'
+    elif month.lower() == 'june':
+        monthNum = '-06-'
+    elif month.lower() == 'july':
+        monthNum = '-07-'
+    elif month.lower() == 'august':
+        monthNum = '-08-'
+    elif month.lower() == 'september':
+        monthNum = '-09-'
+    elif month.lower() == 'october':
+        monthNum = '-10-'
+    elif month.lower() == 'november':
+        monthNum = '-11-'
+    elif month.lower() == 'december':
+        monthNum = '-12-'
+    return bagroomDataFrame[bagroomDataFrame['Tips'].str.contains(month, case=False)]
 
+def totalbagRoomTips(monthNum):
+    return bagRoomTips(monthNum)['Tips'].sum().round(2)
+
+def moneyEarned(month):
+    MonthNum = 0
+    # I will find a more effective way of doing this later
+    if month.lower() == 'january':
+        monthNum = '-01-'
+    elif month.lower() == 'february':
+        monthNum = '-02-'
+    elif month.lower() == 'march':
+        monthNum = '-03-'
+    elif month.lower() == 'april':
+        monthNum = '-04-'
+    elif month.lower() == 'may':
+        monthNum = '-05-'
+    elif month.lower() == 'june':
+        monthNum = '-06-'
+    elif month.lower() == 'july':
+        monthNum = '-07-'
+    elif month.lower() == 'august':
+        monthNum = '-08-'
+    elif month.lower() == 'september':
+        monthNum = '-09-'
+    elif month.lower() == 'october':
+        monthNum = '-10-'
+    elif month.lower() == 'november':
+        monthNum = '-11-'
+    elif month.lower() == 'december':
+        monthNum = '-12-'
+    return bagroomDataFrame[bagroomDataFrame['Money Earned'].str.contains(month, case=False)]
+
+def totalMoneyEarned(monthNum):
+    return moneyEarned(monthNum)['Money Earned'].sum().round(2)
 
 
 # Using matpltlib to create a bar graph
@@ -211,6 +303,9 @@ def income():
         october = totalMonthIncome('october'),
         november = totalMonthIncome('november'),
         december = totalMonthIncome('december'),
+        #mayHours = totalbagRoomHours('may'),
+        #juneHours = totalbagRoomHours('june'),
+        #julyHours = totalbagRoomHours('july')
         )
 
 # Expenses Page
@@ -226,6 +321,14 @@ def expenses():
         golfETotal = expenseSum('Golf Equipment'),
         gigiTotal = expenseSum('Gigi'),
         laundryTotal = expenseSum('Laundry'))
+
+@app.route("/goals")
+def goals():
+    return render_template("goals.html")
+
+@app.route("/settings")
+def settings():
+    return render_template("settings.html")
 
 # Runs the website
 if __name__ == "__main__":
