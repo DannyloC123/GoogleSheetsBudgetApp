@@ -201,9 +201,9 @@ plt.close()
 
 # Using matplotlib, create pie chart
 # Categories
-labels = 'Food', 'Subscriptions', 'Golf Round', 'Golf Practice', 'Golf Equipment', 'Gigi', 'Laundry', 'Education', 'Bills', 'Car'
+labels = 'Food', 'Subscriptions', 'Golf Rounds', 'Golf Practice', 'Golf Equipment', 'Gigi', 'Laundry', 'Education', 'Bills', 'Car'
 # Amount spent
-sizes = [expenseSum('Food'), expenseSum('Subscriptions'), expenseSum('Golf Rounds'), expenseSum('Golf Practice'), expenseSum('Golf Equipment'), expenseSum('Gigi'), expenseSum('Laundry'), expenseSum('Bills'), expenseSum('Education'), expenseSum('Car')]
+sizes = [expenseSum('Food'), expenseSum('Subscriptions'), expenseSum('Golf Rounds'), expenseSum('Golf Practice'), expenseSum('Golf Equipment'), expenseSum('Gigi'), expenseSum('Laundry'), expenseSum('Education'), expenseSum('Bills'), expenseSum('Car')]
 
 # Using a dictionary, every category is given a total amount spent
 dictionary = {'sizes':sizes, 'labels':labels}
