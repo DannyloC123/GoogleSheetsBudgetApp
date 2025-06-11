@@ -10,6 +10,8 @@
 
 #%% Import Google Sheets API & Load Data
 import os
+
+from matplotlib.dates import MONTHLY
 print("Current working directory:", os.getcwd())
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -45,16 +47,34 @@ loopsDataFrame = pd.DataFrame(loops.get_all_records())
 expensesCategories = pd.DataFrame(expenses.get_all_records())
 bagroomDataFrame = pd.DataFrame(bagroom.get_all_records())
 
+# Function for organizing the months
+def monthNumbers(month:str):
+    months = {
+        'january': '-01-',
+        'february': '-02-',
+        'march': '-03-',
+        'april': '-04-',
+        'may': '-05-',
+        'june': '-06-',
+        'july': '-07-',
+        'august': '-08-',
+        'september': '-09-',
+        'october': '-10-',
+        'november': '-11-',
+        'december': '-12-',
+    }
+    return months.get(month.lower(), '')
+
 # Gathers all of the expenses for the specific type of expense
 def expense(type):
     return expensesCategories[expensesCategories['Category'].str.contains(type, case=False)]
 
 # Sums the total amount spent on the expense type
 def expenseSum(type):
-    return expense(type)['Amount'].sum().round(2)
+    return round(expense(type)['Amount'].sum(), 2)
 
 # List of all of the expenses
-expenseTypes = ['Food', 'Subscriptions', 'Golf Round', 'Golf Practice', 'Golf Equipment', 'Gigi', 'Laundry']
+expenseTypes = ['Food', 'Subscriptions', 'Golf Round', 'Golf Practice', 'Golf Equipment', 'Gigi', 'Laundry', 'Education', 'Bills', 'Car']
 
 # Gets the total expenses across all types
 def totalExpense():
@@ -62,38 +82,12 @@ def totalExpense():
     for expense in expenseTypes:
         val = expenseSum(expense)
         totalExpenseSum += val
-    return totalExpenseSum.round(2)
+    return round(totalExpenseSum, 2)
 
 
 # Gets all the income in the month chosen
-def monthIncome(month):
-    monthNum = ''
-
-    # I will find a more effective way of doing this later
-    if month.lower() == 'january':
-        monthNum = '-01-'
-    elif month.lower() == 'february':
-        monthNum = '-02-'
-    elif month.lower() == 'march':
-        monthNum = '-03-'
-    elif month.lower() == 'april':
-        monthNum = '-04-'
-    elif month.lower() == 'may':
-        monthNum = '-05-'
-    elif month.lower() == 'june':
-        monthNum = '-06-'
-    elif month.lower() == 'july':
-        monthNum = '-07-'
-    elif month.lower() == 'august':
-        monthNum = '-08-'
-    elif month.lower() == 'september':
-        monthNum = '-09-'
-    elif month.lower() == 'october':
-        monthNum = '-10-'
-    elif month.lower() == 'november':
-        monthNum = '-11-'
-    elif month.lower() == 'december':
-        monthNum = '-12-'
+def monthlyLoopIncome(month):
+    monthNum = monthNumbers(month)
     return loopsDataFrame[loopsDataFrame['Date'].str.contains(monthNum, case=False)]
 
 # Gets all the income from the person chosen
@@ -101,112 +95,63 @@ def personIncome(person):
     return loopsDataFrame[loopsDataFrame['Client Name/Golfer'].str.contains(person, case=False)]
 
 # Gets the total sum of income in a month
-def totalMonthIncome(monthNum):
-    return monthIncome(monthNum)['Money Earned'].sum().round(2)
+def totalMonthlyLoopIncome(month):
+    return round(monthlyLoopIncome(month)['Money Earned'].sum(), 2)
 
 # Gets the total sum of income from a person
 def totalPersonIncome(person):
-    return personIncome(person)['Money Earned'].sum().round(2)
+    return round(personIncome(person)['Money Earned'].sum(), 2)
 
 # Gets the total life time amount of income earned
 def incomeLoops():
-    return loopsDataFrame['Money Earned'].sum().round(2)
+    return round(loopsDataFrame['Money Earned'].sum(), 2)
 
 def bagRoomHours(month):
-    monthNum = 0
-    # I will find a more effective way of doing this later
-    if month.lower() == 'january':
-        monthNum = '-01-'
-    elif month.lower() == 'february':
-        monthNum = '-02-'
-    elif month.lower() == 'march':
-        monthNum = '-03-'
-    elif month.lower() == 'april':
-        monthNum = '-04-'
-    elif month.lower() == 'may':
-        monthNum = '-05-'
-    elif month.lower() == 'june':
-        monthNum = '-06-'
-    elif month.lower() == 'july':
-        monthNum = '-07-'
-    elif month.lower() == 'august':
-        monthNum = '-08-'
-    elif month.lower() == 'september':
-        monthNum = '-09-'
-    elif month.lower() == 'october':
-        monthNum = '-10-'
-    elif month.lower() == 'november':
-        monthNum = '-11-'
-    elif month.lower() == 'december':
-        monthNum = '-12-'
-    return bagroomDataFrame[bagroomDataFrame['Hours Worked'].str.contains(month, case=False)]
+    monthNum = monthNumbers(month)
+    return bagroomDataFrame[bagroomDataFrame['Date'].str.contains(month, case=False)]
 
-def totalbagRoomHours(monthNum):
-    return bagRoomHours(monthNum)['Hours Worked'].sum().round(2)
+# Using the number of a mont, this function will return the total hours worked in bagroom for that month
+def totalbagRoomHours(month):
+    monthNum = monthNumbers(month)
+    return round(bagRoomHours(monthNum)['Hours Worked'].sum(), 2)
 
 def bagRoomTips(month):
-    MonthNum = 0
-    # I will find a more effective way of doing this later
-    if month.lower() == 'january':
-        monthNum = '-01-'
-    elif month.lower() == 'february':
-        monthNum = '-02-'
-    elif month.lower() == 'march':
-        monthNum = '-03-'
-    elif month.lower() == 'april':
-        monthNum = '-04-'
-    elif month.lower() == 'may':
-        monthNum = '-05-'
-    elif month.lower() == 'june':
-        monthNum = '-06-'
-    elif month.lower() == 'july':
-        monthNum = '-07-'
-    elif month.lower() == 'august':
-        monthNum = '-08-'
-    elif month.lower() == 'september':
-        monthNum = '-09-'
-    elif month.lower() == 'october':
-        monthNum = '-10-'
-    elif month.lower() == 'november':
-        monthNum = '-11-'
-    elif month.lower() == 'december':
-        monthNum = '-12-'
-    return bagroomDataFrame[bagroomDataFrame['Tips'].str.contains(month, case=False)]
+    MonthNum = monthNumbers(month)
+    return bagroomDataFrame[bagroomDataFrame['Date'].str.contains(month, case=False)]
 
-def totalbagRoomTips(monthNum):
-    return bagRoomTips(monthNum)['Tips'].sum().round(2)
+# Using the number of the month, this function returns the total amount of tip money earned in that month
+def totalbagRoomTips(month):
+    monthNum = monthNumbers(month)
+    return round(bagRoomTips(monthNum)['Tips'].sum(), 2)
+
+def totalbagRoomEarned(month):
+    monthNum = monthNumbers(month)
+    return round(bagRoomTips(monthNum)['Money Earned'].sum(), 2)
+
+########################################
 
 def moneyEarned(month):
-    MonthNum = 0
-    # I will find a more effective way of doing this later
-    if month.lower() == 'january':
-        monthNum = '-01-'
-    elif month.lower() == 'february':
-        monthNum = '-02-'
-    elif month.lower() == 'march':
-        monthNum = '-03-'
-    elif month.lower() == 'april':
-        monthNum = '-04-'
-    elif month.lower() == 'may':
-        monthNum = '-05-'
-    elif month.lower() == 'june':
-        monthNum = '-06-'
-    elif month.lower() == 'july':
-        monthNum = '-07-'
-    elif month.lower() == 'august':
-        monthNum = '-08-'
-    elif month.lower() == 'september':
-        monthNum = '-09-'
-    elif month.lower() == 'october':
-        monthNum = '-10-'
-    elif month.lower() == 'november':
-        monthNum = '-11-'
-    elif month.lower() == 'december':
-        monthNum = '-12-'
-    return bagroomDataFrame[bagroomDataFrame['Money Earned'].str.contains(month, case=False)]
+    MonthNum = monthNumbers()
+    return bagroomDataFrame[bagroomDataFrame['Date'].str.contains(month, case=False)]
 
-def totalMoneyEarned(monthNum):
-    return moneyEarned(monthNum)['Money Earned'].sum().round(2)
+def totalMonthlyIncome(month):
+    total = 0
+    loopIncome = totalMonthlyLoopIncome(month)
+    tip = totalbagRoomTips(month)
+    bagroomEarned = totalbagRoomEarned(month)
+    total += loopIncome + bagroomEarned + tip
+    return round(total, 2)
+
+monthList = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
+
+def totalMoneyEarned():
+    runningTotal = 0
+    for individualMonth in monthList:
+        loopIncome = totalMonthlyLoopIncome(individualMonth)
+        tip = totalbagRoomTips(individualMonth)
+        bagroomEarned = totalbagRoomEarned(individualMonth)
+        runningTotal += loopIncome + bagroomEarned + tip
+    return round(runningTotal, 2)
 
 
 # Using matpltlib to create a bar graph
@@ -217,11 +162,11 @@ months = 'may', 'june', 'july', 'august', 'september'
 
 # Amount earned
 amount = [
-    totalMonthIncome('may'),
-    totalMonthIncome('june'),
-    totalMonthIncome('july'),
-    totalMonthIncome('august'),
-    totalMonthIncome('september'),
+    totalMonthlyIncome('may'),
+    totalMonthlyIncome('june'),
+    totalMonthlyIncome('july'),
+    totalMonthlyIncome('august'),
+    totalMonthlyIncome('september'),
 ]
 
 
@@ -256,9 +201,9 @@ plt.close()
 
 # Using matplotlib, create pie chart
 # Categories
-labels = 'Food', 'Subsrciptions', 'Golf Rounds', 'Golf Practice', 'Golf Equipment', 'Gigi', 'Laundry'
+labels = 'Food', 'Subscriptions', 'Golf Round', 'Golf Practice', 'Golf Equipment', 'Gigi', 'Laundry', 'Education', 'Bills', 'Car'
 # Amount spent
-sizes = [expenseSum('Food'), expenseSum('Subscriptions'), expenseSum('Golf Rounds'), expenseSum('Golf Practice'), expenseSum('Golf Equipment'), expenseSum('Gigi'), expenseSum('Laundry')]
+sizes = [expenseSum('Food'), expenseSum('Subscriptions'), expenseSum('Golf Rounds'), expenseSum('Golf Practice'), expenseSum('Golf Equipment'), expenseSum('Gigi'), expenseSum('Laundry'), expenseSum('Bills'), expenseSum('Education'), expenseSum('Car')]
 
 # Using a dictionary, every category is given a total amount spent
 dictionary = {'sizes':sizes, 'labels':labels}
@@ -290,22 +235,23 @@ def index():
 @app.route("/income")
 def income():
     return render_template("income.html",
-        #totalIncome = income(),
-        january = totalMonthIncome('january'),
-        february = totalMonthIncome('february'),
-        march = totalMonthIncome('march'),
-        april = totalMonthIncome('april'),
-        may = totalMonthIncome('may'),
-        june = totalMonthIncome('june'),
-        july = totalMonthIncome('july'),
-        august = totalMonthIncome('august'),
-        september = totalMonthIncome('september'),
-        october = totalMonthIncome('october'),
-        november = totalMonthIncome('november'),
-        december = totalMonthIncome('december'),
-        #mayHours = totalbagRoomHours('may'),
-        #juneHours = totalbagRoomHours('june'),
-        #julyHours = totalbagRoomHours('july')
+        totalIncome = totalMoneyEarned(),
+        january = totalMonthlyIncome('january'),
+        february = totalMonthlyIncome('february'),
+        march = totalMonthlyIncome('march'),
+        april = totalMonthlyIncome('april'),
+        may = totalMonthlyIncome('may'),
+        june = totalMonthlyIncome('june'),
+        july = totalMonthlyIncome('july'),
+        august = totalMonthlyIncome('august'),
+        september = totalMonthlyIncome('september'),
+        october = totalMonthlyIncome('october'),
+        november = totalMonthlyIncome('november'),
+        december = totalMonthlyIncome('december'),
+        mayHours = totalbagRoomHours('may'),
+        juneHours = totalbagRoomHours('june'),
+        julyHours = totalbagRoomHours('july'),
+        augustHours = totalbagRoomHours('august')
         )
 
 # Expenses Page
@@ -320,7 +266,10 @@ def expenses():
         golfPTotal = expenseSum('Golf Practice'),
         golfETotal = expenseSum('Golf Equipment'),
         gigiTotal = expenseSum('Gigi'),
-        laundryTotal = expenseSum('Laundry'))
+        laundryTotal = expenseSum('Laundry'),
+        billsTotal = expenseSum('Bills'),
+        carTotal = expenseSum('Car'),
+        educationTotal = expenseSum('Education'))
 
 @app.route("/goals")
 def goals():
