@@ -97,6 +97,55 @@
             position: absolute;
             left: 20%;
         }
+
+        .expenses-box {
+            background-color: #1e1e1e;
+            color: white;
+            border-radius: 10px;
+            width: 1240px;
+            height: 650px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            position: absolute;
+            top: 3%;
+            left: 275px;
+        }
+
+        .inside-expenses-box1 {
+            background-color: #272727e2;
+            border-radius: 10px;
+            width: 1175px;
+            margin: 10px;
+            padding: 20px;
+            color: white;
+            
+            position: absolute;
+            top: 10%
+        }
+
+        .inside-expenses-box2 {
+            background-color: #272727e2;
+            border-radius: 10px;
+            width: 1175px;
+            margin: 10px;
+            padding: 20px;
+            color: white;
+
+            position: absolute;
+            top: 24%;
+        }
+
+        .expenses-box-header {
+            background-color: #1e1e1e;
+            border-bottom: 1px solid #333;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .expenses-box-content {
+            padding: 170px;
+            color: #aaa;
+        }
         </style>
 
     </head>
@@ -138,21 +187,16 @@
 
             </div>
 
-                <div class="fixed-text">
-                    <h1>Expenses Page</h1>
-                    <p>This is where you'll track your expenses.</p>
-                    <h1>Total Expenses: ${{ total_expenses }}</h1>
-                    <p>Food: ${{ foodTotal }}</p>
-                    <p>Subscriptions: ${{ subTotal }}</p>
-                    <p>Golf Rounds: ${{ golfRTotal }}</p>
-                    <p>Golf Practice: ${{ golfPTotal }}</p>
-                    <p>Golf Equipment: ${{ golfETotal }}</p>
-                    <p>Gigi: ${{ gigiTotal }}</p>
-                    <p>Laundry: ${{ laundryTotal }}</p>
-                    <p>Bills: ${{ billsTotal }}</p>
-                    <p>Car: ${{ carTotal }}</p>
-                    <p>Education: ${{ educationTotal }}</p>
+            <div class="expenses-box">
+                <div class="expenses-box-header">Expenses</div>
+                    <h1>Total Expenses: ${{total_expenses}}</h1>
+                    <form>
+                        <input type="checkbox" name="Yes" value="Yes">Yes
+                        <input type="checkbox" name="No" value="No">No
+                    </form>
+                <div class="expenses-box-content">
                 </div>
+            </div>
             </body>
         </head>
     </html>

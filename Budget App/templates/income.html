@@ -96,6 +96,55 @@
             position: absolute;
             left: 20%;
         }
+
+        .income-box {
+            background-color: #1e1e1e;
+            color: white;
+            border-radius: 10px;
+            width: 1240px;
+            height: 650px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            position: absolute;
+            top: 3%;
+            left: 275px;
+        }
+
+        .inside-income-box1 {
+            background-color: #272727e2;
+            border-radius: 10px;
+            width: 1175px;
+            margin: 10px;
+            padding: 20px;
+            color: white;
+            
+            position: absolute;
+            top: 10%
+        }
+
+        .inside-income-box2 {
+            background-color: #272727e2;
+            border-radius: 10px;
+            width: 1175px;
+            margin: 10px;
+            padding: 20px;
+            color: white;
+
+            position: absolute;
+            top: 24%;
+        }
+
+        .income-box-header {
+            background-color: #1e1e1e;
+            border-bottom: 1px solid #333;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .income-box-content {
+            padding: 170px;
+            color: #aaa;
+        }
         </style>
 
     </head>
@@ -136,18 +185,11 @@
                 </div>
             </div>
 
-
-            <div class="fixed-text">
-                <h1>This is the Income Page</h1>
-                <p>Total Income: ${{ totalIncome }}</p>
-                <p>May: ${{ may }}</p>
-                <p>June: ${{ june }}</p>
-                <p>July: ${{ july }}</p>
-                <p>August: ${{ august }}</p>
-                <p>Hours Worked in May: {{ mayHours }} hours</p>
-                <p>Hours Worked in June: {{ juneHours }} hours</p>
-                <p>Hours Worked in July: {{ julyHours }} hours</p>
-                <p>Hours Worked in August: {{ augustHours }} hours</p>
+            <div class="income-box">
+                <div class="income-box-header">Expenses</div>
+                    <h1>Total Income: ${{totalIncome}}</h1>
+                <div class="income-box-content">
             </div>
         </body>
+    </head>
 </html>
