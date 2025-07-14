@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "budget-app-459803",
+  "private_key_id": "8ebd263dacaa061ff3d44db8e000728fa518458b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDc104rZFd4kP+X\nasOg3a0zkXx4omSnVjJBHBoEdsXcYMPzZWzYIgnZHPfNpvpbcSfpCtOCDwMtkRy5\nPXf6rPYIoMKgDLh6Tk6iyDyTtE3q9EvX3eVpGcaexH876R6lbB8z1T98nSpDxRbk\nfTWuCxxhI4LpiR/P2IVMBrUGCqdR1jk1pPVHBY7NVUxKC8CPrSA9r/LXrJP0cghe\n2A2MO9eX1JgfkkuMxGTWEvs1Cbq8wGueUpgcrKjuzaP+XQULRriQAfAkkVWqZ+tb\nG1zMVp6z5owasV/JRoNOon0+eubbVNi/+h6DEWCLDuku7jOC71tJ3Kartp4F2rQo\n67qYVatvAgMBAAECggEAFPb1i0X/zcjKEshGYQeaUSpvDA6yinYy2B6AU8sotmaT\nQ5Bt2EjG8Y7/8Ux4OOURmlx2PsMJFLLRbL5qnOf9hU0pnMMIYkf7zBVBNu5ndTYS\n2x/MDwGs6taRk5DqYV7VyXhligFriTp1FWTTiz2vyIL0AxKK7BLMeK6sUbICN1D3\nIsCn9Gl0xpQtCq7xXNViZvKYSc87Sfgi1MjOYngrGpJiVlBYIwegBhhUKrM7JoPC\nSOftDkRBAoDv46o6xzZU5QQvUmvT7i7BERzPzfy2xazWI8NgdY+ICteodd1+EFhS\nvTNt0WnSK5p34jhC1XP116085iw6nErZiuOv9GjXHQKBgQD/ubBnWayXxMvdK70F\nSECfPSpUFc3jordRGlAUHKA0vol9Ko3TFVgAVYfv4e+T1DLitoki2DUuyVV7bSfG\ndVnJyhxkXufusgR8Y/Hn5BgZgWQhMaCcN3cX+qq1bto8f848FmdjQhLcLbzG2+JX\nGOyjzTE2xpUrwHa/xFPvxZBCUwKBgQDdFAZiJKyW/ksHWY+OyXs5niid5arhPEtm\nMIcachMa8uiE8fxTS3eKmISIOiE3BzYqgYbCZAjm7ht/lxuXXTLw5f0RiejBTzkP\ny+ZzfvJYaaSOpJ2fq7vO48/QTpxzZBbUuZ0kGsMofCfApxrgr0VCyWLZe8mVovY4\ngMUFGt7G9QKBgQCi35TgLnhD7b7ebjYkwCEQiveDuKN6wa86Q6UPOjA7h8Ov6cOM\n1sJG7DL5cRCTOgry5MmxXL16wBbm1t4Hg8SdRlIRB3V3TQCYbVusk1VaIVQx5Bbk\niFsc9bV2e1UaRViIYsiUqoeynprmmTOuv5wws8cNmSt3Q00e1J+VTmKUKwKBgHK+\ndP21aTrJa2m6K0+B9YoXM5+YV5OltsCoSUcJlC71ioeODVeyIK53sLn/6cNk49E1\n/xqfzxsE1JLpe/GY9tqflDTpLjw/AS/YtZiWd/Q5iKZcfE8mVEjyZqcIVh1yAoOQ\nfyYBGe/GWN+eG84oSjt6yOp2XE9lEISNGTUoGB6NAoGAEx0Mla+kc6jqRn3CkG/w\nRzskyoqv5vQmiJfMCUKdKFLLQrePAt9gSgsdUEmubM1JX4Ezy8Vkjc3o8eW2ojmQ\ns44A7tTYDTGtoivHqZRfH3UJetA0FhmUIhMl00kL5INABOHKskokllZzUr5tPC30\n4lV6Ak2AiCJ/orjd5zsvn0Q=\n-----END PRIVATE KEY-----\n",
+  "client_email": "budget-app@budget-app-459803.iam.gserviceaccount.com",
+  "client_id": "114235708445425659258",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/budget-app%40budget-app-459803.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
