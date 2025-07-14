@@ -28,7 +28,7 @@ scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/au
 # Step 2: Load the credentials from the file
 # Get absolute path to credentials file, based on this script's location
 script_dir = os.path.dirname(os.path.abspath(__file__))
-json_path = os.path.join(script_dir, "budget-app-459803-8ebd263dacaa.json")
+json_path = os.path.join(script_dir, "budget-app-459803-e1e0ce4f3ad1.json")
 creds = ServiceAccountCredentials.from_json_keyfile_name(json_path, scope)
 
 # Step 3: Authorize the client
