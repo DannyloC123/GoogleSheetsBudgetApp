@@ -1,179 +1,48 @@
-<!DOCTYPE html>
-    <html>
-        <title>Finance Tracker</title>
+{% extends "base.html" %}
+{% block title %}Expenses – Finance Tracker{% endblock %}
 
-        <style>
-        body{
-        background-color: rgba(0, 0, 21, 0.903);
-        }
+{% block content %}
+  <div class="cards">
+    <!-- Pie chart panel -->
+    <section class="card">
+      <div class="card-header">Expenses</div>
+      <!-- add pie-body so we can optionally nudge the image -->
+      <div class="card-body pie-body">
+        <img
+          src="{{ url_for('static', filename='images/pie_chart.png') }}"
+          alt="Monthly Expenses"
+          class="responsive-chart"
+        >
+      </div>
+    </section>
 
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 250px; /* Example width */
-            height: 100%; /* Occupy the full height */
-            background-color: #1a0033e2; /* Example background color */
-        }
+    <!-- Breakdown / totals panel (uses variables you pass in your /expenses route) -->
+    <section class="card">
+      <div class="card-header">Breakdown</div>
+      <div class="card-body" style="flex-direction:column; align-items:flex-start; gap:8px;">
+        <div><strong>Total:</strong> ${{ total_expenses }}</div>
+        <ul style="margin:8px 0 0 16px; padding:0; line-height:1.5;">
+          <li>Food: ${{ foodTotal }}</li>
+          <li>Subscriptions: ${{ subTotal }}</li>
+          <li>Golf Rounds: ${{ golfRTotal }}</li>
+          <li>Golf Practice: ${{ golfPTotal }}</li>
+          <li>Golf Equipment: ${{ golfETotal }}</li>
+          <li>Gigi: ${{ gigiTotal }}</li>
+          <li>Laundry: ${{ laundryTotal }}</li>
+          <li>Education: ${{ educationTotal }}</li>
+          <li>Bills: ${{ billsTotal }}</li>
+          <li>Car: ${{ carTotal }}</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+{% endblock %}
 
-        button {
-            width: 240px;
-            box-sizing: border-box;
-            background: rgba(18, 18, 72, 0); /* Dark blue background */
-            color: white;              /* White text */
-            border: rgb(2, 2, 2);
-            padding: 15px;         /* Padding inside the button */
-            font-size: 16px;           /* Text size */
-            cursor: pointer;           /* Pointer cursor on hover */
-            text-align: left;
-            border-radius: 8px;
-            margin: 5px;
-        }
-
-        button:hover {
-            background-color: white;
-            color: black;
-            border-radius: 8px;
-        }
-
-        .fixed-profile-picture {
-            position: absolute;
-            top: 5%;
-            left: 15%;
-            border-radius: 50%;
-        }
-
-        .fixed-profile-picture img {
-            border-radius: 50%;
-            object-fit: cover;
-            width: 150px;
-            height: 200px;
-        }
-
-        .fixed-profile {
-            position: absolute;
-            top: 35%;
-            left: 30%;
-        }
-
-        p {
-            color:white;
-            font-size: 16px;
-            font-family: sans-serif;
-        }
-
-        .fixed-home-button {
-            position: absolute;
-            top: 45%;
-            left: 0%;
-        }
-
-        .fixed-income-button {
-            position: absolute;
-            top: 54%;
-            left: 0%;
-        }
-
-        .fixed-expenses-button {
-            position: absolute;
-            top: 63%;
-            left: 0%;
-        }
-
-        .fixed-text {
-            color: white;
-            position: absolute;
-            left: 20%;
-        }
-
-        .expenses-box {
-            background-color: #1e1e1e;
-            color: white;
-            border-radius: 10px;
-            width: 1240px;
-            height: 650px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            position: absolute;
-            top: 3%;
-            left: 275px;
-        }
-
-        .inside-expenses-box1 {
-            background-color: #272727e2;
-            border-radius: 10px;
-            width: 1175px;
-            margin: 10px;
-            padding: 20px;
-            color: white;
-            
-            position: absolute;
-            top: 10%
-        }
-
-        .inside-expenses-box2 {
-            background-color: #272727e2;
-            border-radius: 10px;
-            width: 1175px;
-            margin: 10px;
-            padding: 20px;
-            color: white;
-
-            position: absolute;
-            top: 24%;
-        }
-
-        .expenses-box-header {
-            background-color: #1e1e1e;
-            border-bottom: 1px solid #333;
-            padding: 15px;
-            font-weight: bold;
-            font-size: 25px;
-        }
-
-        .expenses-box-content {
-            padding: 170px;
-            color: #aaa;
-        }
-        </style>
-
-    </head>
-        <body>
-            <div class="sidebar">
-                <!-- Profile Picture -->
-                <div class="fixed-profile-picture">
-                    <img src="{{url_for('static', filename='images/luis_pic.png')}}" alt="Luis Profile" width="150" height="150">
-                </div>
-
-                <div class="fixed-profile">
-                    <p>Luis Cruz</p>
-                </div>
-
-                <!-- Home Button -->
-                <div class="fixed-home-button">
-                    <a href="/"><button>Home</button></a>
-                </div>
-
-                <!-- Income Button -->
-                <div class="fixed-income-button">
-                    <a href="/income"><button>Income</button></a>
-                </div>
-
-                <!-- Expenses Button -->
-                <div class="fixed-expenses-button">
-                    <a href="/expenses"><button>Expenses</button></a>
-                </div>
-            </div>
-
-            <div class="expenses-box">
-                <div class="expenses-box-header">Expenses</div>
-                    <h1>Total Expenses: ${{total_expenses}}</h1>
-                    <form>
-                        <input type="checkbox" name="Yes" value="Yes">Yes
-                        <input type="checkbox" name="No" value="No">No
-                    </form>
-                <div class="expenses-box-content">
-                </div>
-            </div>
-            </body>
-        </head>
-    </html>
+{% block extra_css %}
+<!-- Page-specific tweaks (optional) -->
+<style>
+  /* If your legend inside the PNG pushes the pie right, nudge it left a bit */
+  .pie-body .responsive-chart { transform: translateX(-48px); }
+  @media (max-width: 700px) { .pie-body .responsive-chart { transform: none; } }
+</style>
+{% endblock %}

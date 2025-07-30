@@ -1,173 +1,29 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <style>
-        body{
-            background-color: rgba(0, 0, 21, 0.903);
-        }
+{% extends "base.html" %}
+{% block title %}Income – Finance Tracker{% endblock %}
 
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 250px; /* Example width */
-            height: 100%; /* Occupy the full height */
-            background-color: #1a0033e2; /* Example background color */
-        }
+{% block content %}
+  <div class="cards">
+    <section class="card">
+      <div class="card-header">Income</div>
+      <div class="card-body">
+        <img src="{{ url_for('static', filename='images/bar_chart.png') }}"
+             alt="Monthly Income"
+             class="responsive-chart">
+      </div>
+    </section>
 
-        button {
-            width: 240px;
-            box-sizing: border-box;
-            background: rgba(18, 18, 72, 0); /* Dark blue background */
-            color: white;              /* White text */
-            border: rgb(2, 2, 2);
-            padding: 15px;         /* Padding inside the button */
-            font-size: 16px;           /* Text size */
-            cursor: pointer;           /* Pointer cursor on hover */
-            text-align: left;
-            border-radius: 8px;
-            margin: 5px;
-        }
-
-        button:hover {
-            background-color: white;
-            color: black;
-            border-radius: 8px;
-        }
-
-        .fixed-profile-picture {
-            position: absolute;
-            top: 5%;
-            left: 15%;
-            border-radius: 50%;
-        }
-
-        .fixed-profile-picture img {
-            border-radius: 50%;
-            object-fit: cover;
-            width: 150px;
-            height: 200px;
-        }
-
-        .fixed-profile {
-            position: absolute;
-            top: 35%;
-            left: 30%;
-        }
-
-        p {
-            color:white;
-            font-size: 16px;
-            font-family: sans-serif;
-        }
-
-        .fixed-home-button {
-            position: absolute;
-            top: 45%;
-            left: 0%;
-        }
-
-        .fixed-income-button {
-            position: absolute;
-            top: 54%;
-            left: 0%;
-        }
-
-        .fixed-expenses-button {
-            position: absolute;
-            top: 63%;
-            left: 0%;
-        }
-
-        .fixed-text {
-            color: white;
-            position: absolute;
-            left: 20%;
-        }
-
-        .income-box {
-            background-color: #1e1e1e;
-            color: white;
-            border-radius: 10px;
-            width: 1240px;
-            height: 650px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            position: absolute;
-            top: 3%;
-            left: 275px;
-        }
-
-        .inside-income-box1 {
-            background-color: #272727e2;
-            border-radius: 10px;
-            width: 1175px;
-            margin: 10px;
-            padding: 20px;
-            color: white;
-            
-            position: absolute;
-            top: 10%
-        }
-
-        .inside-income-box2 {
-            background-color: #272727e2;
-            border-radius: 10px;
-            width: 1175px;
-            margin: 10px;
-            padding: 20px;
-            color: white;
-
-            position: absolute;
-            top: 24%;
-        }
-
-        .income-box-header {
-            background-color: #1e1e1e;
-            border-bottom: 1px solid #333;
-            padding: 15px;
-            font-weight: bold;
-            font-size: 25px;
-        }
-
-        .income-box-content {
-            padding: 170px;
-            color: #aaa;
-        }
-        </style>
-
-    </head>
-        <body>
-            <div class="sidebar">
-                <!-- Profile Picture -->
-                <div class="fixed-profile-picture">
-                    <img src="{{url_for('static', filename='images/luis_pic.png')}}" alt="Luis Profile" width="150" height="150">
-                </div>
-
-                <div class="fixed-profile">
-                    <p>Luis Cruz</p>
-                </div>
-
-                <!-- Home Button -->
-                <div class="fixed-home-button">
-                    <a href="/"><button>Home</button></a>
-                </div>
-
-                <!-- Income Button -->
-                <div class="fixed-income-button">
-                    <a href="/income"><button>Income</button></a>
-                </div>
-
-                <!-- Expenses Button -->
-                <div class="fixed-expenses-button">
-                    <a href="/expenses"><button>Expenses</button></a>
-                </div>
-            </div>
-
-            <div class="income-box">
-                <div class="income-box-header">Expenses</div>
-                    <h1>Total Income: ${{totalIncome}}</h1>
-                <div class="income-box-content">
-            </div>
-        </body>
-    </head>
-</html>
+    <!-- Optional summary panel -->
+    <section class="card">
+      <div class="card-header">Summary</div>
+      <div class="card-body" style="flex-direction:column; align-items:flex-start; gap:8px;">
+        <div><strong>Total Income:</strong> ${{ totalIncome }}</div>
+        <div style="opacity:.9; font-size:14px;">
+            May: ${{ may }} · June: ${{ june }} · July: ${{ july }} · Aug: ${{ august }} · Sept: ${{ september }}
+        </div>
+        <div style="opacity:.9; font-size:14px;">
+            Bagroom hours — May: {{ mayHours }}, June: {{ juneHours }}, July: {{ julyHours }}, Aug: {{ augustHours }}
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}
