@@ -192,10 +192,15 @@ ax.yaxis.label.set_color('white')
 ax.set_title("Monthly Income", color='white')
 
 
-# Saves the bar graph in files
-bar_image_path = os.path.join('static', 'images', 'bar_chart.png')
+# === Ensure the static/images directory exists and save bar chart ===
+script_dir = os.path.dirname(os.path.abspath(__file__))
+images_dir = os.path.join(script_dir, "static", "images")
+os.makedirs(images_dir, exist_ok=True)
+
+bar_image_path = os.path.join(images_dir, "bar_chart.png")
 plt.savefig(bar_image_path, transparent=True)
 plt.close()
+
 
 
 
@@ -217,10 +222,9 @@ plt.legend(labels=pieChart.labels, loc=[0.95,0.35])
 # Title
 plt.title('Monthly Expenses', color='white')
 
-# Saves the image as png, in a specific folder to be accessed later by html file
-image_path = os.path.join('static', 'images', 'pie_chart.png')
+image_path = os.path.join(images_dir, "pie_chart.png")
 plt.savefig(image_path, transparent=True)
-plt.close
+
 
 
 # Website Pages
@@ -270,14 +274,6 @@ def expenses():
         billsTotal = expenseSum('Bills'),
         carTotal = expenseSum('Car'),
         educationTotal = expenseSum('Education'))
-
-@app.route("/goals")
-def goals():
-    return render_template("goals.html")
-
-@app.route("/settings")
-def settings():
-    return render_template("settings.html")
 
 # Runs the website
 if __name__ == "__main__":
